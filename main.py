@@ -1,7 +1,8 @@
-from aiogram import Bot, Dispatcher, executor, types
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
+import asyncio
+from aiogram import Bot, Dispatcher, types
+from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.types import ReplyKeyboardMarkup
-from aiogram.dispatcher import FSMContext
+from aiogram.fsm.context import FSMContext
 
 from userStates import UserStates
 from configure.env import config
@@ -124,6 +125,8 @@ async def answer(message: types.Message):
 async def answer(message: types.Message):
     await message.answer('Прости, я не понимаю тебя')
 
+async def main():
+    await dp.start_polling(bot)
 
-if __name__ == '__main__':
-    executor.start_polling(dp)
+if __name__ == "__main__":
+    asyncio.run(main())

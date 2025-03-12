@@ -1,7 +1,8 @@
-yfinance --upgrade --no-cache-dir
+yfinance
 pandas
 numpy
 PyPortfolioOpt
 matplotlib
 datetime
 scikit-learn
+aiogram
