@@ -34,26 +34,9 @@ def bad_responce():
     return 'Ошибка считывания, попробуйте ещё раз'
 
 
-def make_portfolio_minvol(portfolio, rest):
+def make_portfolio(portfolio):
     ans = ['Твой портфель:']
-    for stocks in portfolio.keys():
-        ans.append(f"{stocks.split('.')[0]} - {10 * portfolio[stocks]} шт.")
-    ans.append(
-        "Остаток денежных средств после построения портфеля с минимальной волатильностью составляет {:.2f} рублей".format(
-            rest))
+    for ticker, details in portfolio.items():
+        if details['weight']*100 > 0.1:
+            ans.append(f"{ticker.split('.')[0]}: {details['allocation']:.2f} руб. ({details['weight']:.2%})")
     return '\n'.join(ans)
-
-
-def make_portfolio_maxsharp(portfolio, rest):
-    ans = ['Твой портфель:']
-    for stocks in portfolio.keys():
-        ans.append(f"{stocks.split('.')[0]} - {10 * portfolio[stocks]} шт.")
-    ans.append(
-        "Остаток денежных средств после построения портфеля с максимальным коэфициетом шарпа составляет {:.2f} рублей".format(
-            rest))
-    return '\n'.join(ans)
-
-
-def get_info_stocks(mu, sisma, last_prise):
-    return 'Годовая доходность: {:.2f}%\nДисперсия акции: {:.2f}\nПоследняя цена: {:.2f} руб.'.format(mu, sisma,
-                                                                                                      last_prise)
